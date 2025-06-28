@@ -1,67 +1,46 @@
-# Simple and portable CMake template for raylib
+# CrossTheRoad
 
-This is a basic project template for raylib using CMake and has been tested with Visual Studio, Visual Studio Code and CLion.
+**Cross The Road** es un juego 2D inspirado en el clásico "Frogger". El objetivo es simple: ¡cruza la calle esquivando coches sin morir en el intento!
 
-The master branch of the raylib source code is downloaded using CMake FetchContent from github and compiled from source as it is much easier than including prebuilt binaries for every platform and configuration.
+## Características
 
-Building from the cmake file will build both raylib and `src/main.c` which includes a basic example of a raylib program.
+- Gráficos con [Raylib](https://www.raylib.com/)
+- Jugabilidad basada en movimiento por grilla
+- Entorno modular para personajes, enemigos y lógica de juego
+- Tests automatizados con [Google Test](https://github.com/google/googletest)
+- Sistema de compilación multiplataforma con CMake
 
-## Asset handling
+## Instalación
 
-The example in `src/main.c` uses an example image located in the `assets` folder.
-To load it we use `ASSETS_PATH`, which is a string macro with the *absolute* path "assets" directory.
-This macro is defined in the `CMakeLists.txt` file on line `23`.
- 
-If you plan on releasing or sharing your game consider manually setting the value of the `ASSETS_PATH` macro.
+Clona el repositorio
 
-In C you can concatenate string literals by putting them next to each other, 
-eg: `"A" "B"` is `"AB"`. So ASSETS_PATH `"test.png"` becomes `"/path/to/your/assets/test.png"`
-
-If you wanna share your game with others you should set ASSETS_PATH to be a *relative* path like "./assets/". You can do this in the CMakeLists.txt file. 
-
-## Using C++
-
-Using c++ is quite simple, just change these lines in the `CMakeLists.txt`
-from
-```cmake
-project(my_raylib_game C)
-
-set(CMAKE_C_STANDARD 99)
-
-file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/sources/*.c")
+```sh
+git clone https://github.com/macasteglione/CrossTheRoad
+cd CrossTheRoad
 ```
-to
-```cmake
-project(my_raylib_game CXX)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+Crea un archivo llamado `is` con el siguiente contenido:
 
-file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/sources/*.cpp")
-```
-After this just reload cmake and it should build fine.
-
-## Script
 ```sh
 #!/bin/bash
 set -e
 
 BUILD_DIR="build"
-EXECUTABLE="CrossTheRoad"  # Cambia al nombre real de tu ejecutable
+EXECUTABLE="CrossTheRoad"
 
 function build() {
-  echo "🧹 Limpiando y creando directorio de build..."
-  rm -rf "$BUILD_DIR"
-  mkdir -p "$BUILD_DIR"
-
   echo "🛠️ Configurando proyecto con CMake..."
-  cmake -S . -B "$BUILD_DIR" -DBUILD_TESTING=ON
-
+  cmake -S . -B "$BUILD_DIR" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
   echo "🔨 Compilando proyecto..."
-  cmake --build "$BUILD_DIR" -j
+  cmake --build "$BUILD_DIR" -- -j
 }
 
-function test() {
+function clear() {
+  echo "🧹 Limpiando y creando directorio de build..."
+  rm -rf "$BUILD_DIR"
+}
+
+function tests() {
   echo "🧪 Compilando tests y ejecutando..."
   cmake --build "$BUILD_DIR" --target testing -j
   ctest --test-dir "$BUILD_DIR" --output-on-failure
@@ -73,24 +52,74 @@ function run() {
 }
 
 if [ $# -eq 0 ]; then
-  echo "Uso: $0 {build|tests|run}"
+  echo "Uso: $0 {build|clear|tests|run}"
   exit 1
 fi
 
 case "$1" in
+  clear)
+    clear
+    ;;
   build)
     build
     ;;
   tests)
-    test
+    tests
     ;;
   run)
     run
     ;;
   *)
     echo "Opción inválida: $1"
-    echo "Uso: $0 {build|test|run}"
+    echo "Uso: $0 {build|clear|tests|run}"
     exit 1
     ;;
 esac
+```
+
+Dale permisos de ejecución:
+
+```sh
+chmod +x is
+```
+
+## Compilación, Ejecución y Tests
+
+Compilar el proyecto:
+
+```sh
+./is build
+```
+
+Ejecutar el juego:
+
+```sh
+./is run
+```
+
+Ejecutar los tests:
+
+```sh
+./is tests
+```
+
+Limpiar el directorio de compilación:
+
+```sh
+./is clear
+```
+
+## Estructura del Proyecto
+
+```py
+CrossTheRoad/
+├── cmake/         # Archivos auxiliares de compilación
+├── external/      # Módulos externos (raylib, gtest, etc.)
+├── src/           # Código fuente del juego
+├── include/       # Archivos de cabecera
+├── testing/       # Tests de las funcionalidades
+├── assets/        # Recursos gráficos y de sonido (organizados por tipo)
+├── build/         # Directorio de compilación (generado automáticamente)
+├── CMakeLists.txt
+└── README.md
 ```

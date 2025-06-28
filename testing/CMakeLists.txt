@@ -1,7 +1,12 @@
-file(GLOB TEST_SOURCES test_*.cpp)
+file(GLOB TEST_SOURCES "${CMAKE_CURRENT_LIST_DIR}/test_*.cpp")
+file(GLOB PROJECT_SOURCES "${CMAKE_CURRENT_LIST_DIR}/../src/*.cpp")
 
-add_executable(testing ${TEST_SOURCES})
-target_link_libraries(testing PRIVATE GTest::gtest_main)
+# Excluye main.cpp
+list(REMOVE_ITEM PROJECT_SOURCES "${CMAKE_CURRENT_LIST_DIR}/../src/main.cpp")
+
+add_executable(testing ${TEST_SOURCES} ${PROJECT_SOURCES})
+target_include_directories(testing PRIVATE "${CMAKE_CURRENT_LIST_DIR}/../include")
+target_link_libraries(testing PRIVATE GTest::gtest_main raylib)
 
 include(GoogleTest)
 gtest_discover_tests(testing)
