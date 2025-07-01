@@ -9,10 +9,11 @@
 #define CHARACTER_HEADER
 
 #include <raylib.h>
+#include "Constants.h"
 
 class Character {
 protected:
-  float movementSpeed = 5.f;
+  float movementSpeed = CHARACTER_DEFAULT_SPEED;
   Vector2 position;
 
 public:
