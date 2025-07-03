@@ -12,6 +12,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define TARGET_FPS 60
+#define CHARACTER_DEFAULT_SPEED 1.0f
 
 // Character
 #define CHARACTER_DEFAULT_SPEED 1.0f
