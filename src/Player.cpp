@@ -1,6 +1,5 @@
 #include "../include/Constants.h"
 #include "../include/Player.h"
-#include "raylib.h"
 
 Player::Player(const Vector2 _position) : Character(_position) {
   playerTexture = LoadTexture(PLAYER_SPRITE_SHEET);
@@ -10,7 +9,7 @@ Player::Player(const Vector2 _position) : Character(_position) {
 
   frameRec = {0.f, 0.f, frameWidth, frameHeight};
   isMoving = false;
-  direction = DOWN;
+  spriteDirectionIndex = PLAYER_SPRITE_DOWN;
 }
 
 Player::~Player() { UnloadTexture(playerTexture); }
@@ -45,25 +44,25 @@ void Player::ApplyInput(const InputState &input) {
 
   if (input.up) {
     position.y -= movementSpeed;
-    direction = UP;
-    isMoving = true;
-  }
-
-  else if (input.down) {
-    position.y += movementSpeed;
-    direction = DOWN;
+    spriteDirectionIndex = PLAYER_SPRITE_UP;
     isMoving = true;
   }
 
   else if (input.left) {
     position.x -= movementSpeed;
-    direction = LEFT;
+    spriteDirectionIndex = PLAYER_SPRITE_LEFT;
     isMoving = true;
   }
 
   else if (input.right) {
     position.x += movementSpeed;
-    direction = RIGHT;
+    spriteDirectionIndex = PLAYER_SPRITE_RIGHT;
+    isMoving = true;
+  }
+
+  else if (input.down) {
+    position.y += movementSpeed;
+    spriteDirectionIndex = PLAYER_SPRITE_DOWN;
     isMoving = true;
   }
 }
@@ -81,6 +80,6 @@ void Player::UpdateAnimation(const InputState &input, float delta) {
     timer = 0.0f;
   }
 
-  frameRec.y = direction * frameHeight;
+  frameRec.y = spriteDirectionIndex * frameHeight;
   frameRec.x = currentFrame * frameWidth;
 }
