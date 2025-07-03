@@ -1,8 +1,8 @@
-#include <gtest/gtest.h>
-#include "../include/Player.h"
 #include "../include/Constants.h"
+#include "../include/Player.h"
+#include <gtest/gtest.h>
 
-TEST(PlayerTest, GetPositionTest) {
+TEST(PositionTest, GetPositionTest) {
   Vector2 pos = {1, 1};
   Player p(pos);
 
@@ -21,8 +21,8 @@ TEST(PositionTest, SetPositionTest) {
 
 TEST(MovementTest, GetMovementSpeedTest) {
   Player p(Vector2({0, 0}));
-  
-  EXPECT_FLOAT_EQ(p.GetMovementSpeed(), PLAYER_MOVEMENT_SPEED);
+
+  EXPECT_FLOAT_EQ(p.GetMovementSpeed(), CHARACTER_DEFAULT_SPEED);
 }
 
 TEST(MovementTest, SetMovementSpeedTest) {
@@ -36,15 +36,12 @@ TEST(MovementTest, SetMovementSpeedTest) {
 TEST(ControlTest, KeyInputTest) {
   Vector2 pos = {10, 10};
   Player p(pos);
-  InputState input = {
-    .up = true,
-    .down = false,
-    .left = false,
-    .right = true
-  };
 
+  InputState input = {.up = false, .down = false, .left = false, .right = true};
   p.ApplyInput(input);
-
   EXPECT_FLOAT_EQ(p.GetPosition().x, pos.x + p.GetMovementSpeed());
+
+  input = {.up = true, .down = false, .left = false, .right = false};
+  p.ApplyInput(input);
   EXPECT_FLOAT_EQ(p.GetPosition().y, pos.y - p.GetMovementSpeed());
 }
