@@ -2,7 +2,7 @@
 #include "../include/Player.h"
 #include <gtest/gtest.h>
 
-TEST(PositionTest, GetPositionTest) {
+TEST(PlayerPositionTest, GetPositionTest) {
   Vector2 pos = {1, 1};
   Player p(pos);
 
@@ -10,7 +10,7 @@ TEST(PositionTest, GetPositionTest) {
   EXPECT_FLOAT_EQ(p.GetPosition().y, pos.y);
 }
 
-TEST(PositionTest, SetPositionTest) {
+TEST(PlayerPositionTest, SetPositionTest) {
   Vector2 newPos = {2, 3};
   Player p(Vector2({1, 2}));
   p.SetPosition(newPos);
@@ -19,13 +19,13 @@ TEST(PositionTest, SetPositionTest) {
   EXPECT_FLOAT_EQ(p.GetPosition().y, newPos.y);
 }
 
-TEST(MovementTest, GetMovementSpeedTest) {
+TEST(PlayerMovementTest, GetMovementSpeedTest) {
   Player p(Vector2({0, 0}));
 
   EXPECT_FLOAT_EQ(p.GetMovementSpeed(), CHARACTER_DEFAULT_SPEED);
 }
 
-TEST(MovementTest, SetMovementSpeedTest) {
+TEST(PlayerMovementTest, SetMovementSpeedTest) {
   Player p(Vector2({0, 0}));
   float newSpeed = 10.f;
   p.SetMovementSpeed(newSpeed);
@@ -33,7 +33,7 @@ TEST(MovementTest, SetMovementSpeedTest) {
   EXPECT_FLOAT_EQ(p.GetMovementSpeed(), newSpeed);
 }
 
-TEST(ControlTest, KeyInputTest) {
+TEST(PlayerControlTest, KeyInputTest) {
   Vector2 pos = {10, 10};
   Player p(pos);
 

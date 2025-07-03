@@ -10,6 +10,8 @@
 
 #include <raylib.h>
 
+enum Direction { DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3 };
+
 class Character {
 protected:
   Vector2 position;
