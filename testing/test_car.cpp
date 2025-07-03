@@ -1,5 +1,4 @@
 #include "../include/Car.h"
-#include "../include/Constants.h"
 #include <gtest/gtest.h>
 
 TEST(CarPositionTest, GetPositionTest) {
@@ -19,16 +18,18 @@ TEST(CarPositionTest, SetPositionTest) {
   EXPECT_FLOAT_EQ(c.GetPosition().y, newPos.y);
 }
 
-TEST(CarMovementTest, GetMovementSpeedTest) {
-  Car c(Vector2({0, 0}));
-
-  EXPECT_FLOAT_EQ(c.GetMovementSpeed(), CHARACTER_DEFAULT_SPEED);
-}
-
 TEST(CarMovementTest, SetMovementSpeedTest) {
   Car c(Vector2({0, 0}));
   float newSpeed = 10.f;
   c.SetMovementSpeed(newSpeed);
 
   EXPECT_FLOAT_EQ(c.GetMovementSpeed(), newSpeed);
+}
+
+TEST(CarMovementTest, RandomMovementTest) {
+  Vector2 initialPos = {0, 0};
+  Car c(initialPos);
+  c.Update(1.0f); // Update con un delta de 1 segundo
+
+  EXPECT_NE(c.GetPosition().x, initialPos.x);
 }

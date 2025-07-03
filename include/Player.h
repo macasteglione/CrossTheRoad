@@ -21,7 +21,7 @@ struct InputState {
 class Player final : public Character {
 private:
   InputState inputState;
-  Direction direction;
+  int spriteDirectionIndex;
 
   void UpdateAnimation(const InputState &input, float delta);
   InputState ReadInput() const;
