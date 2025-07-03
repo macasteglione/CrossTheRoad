@@ -13,7 +13,7 @@
 
 class Car : public Character {
 private:
-  Direction direction;
+  int carDirection;
 
 public:
   explicit Car(Vector2 _position);

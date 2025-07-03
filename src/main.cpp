@@ -10,7 +10,8 @@ int main(void) {
 
   Player *player =
       new Player(Vector2{SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f});
-  Car *car = new Car(Vector2{10, 10}); // Posicion hardcodeada por el momento
+  Car *car = new Car(
+      Vector2{SCREEN_WIDTH / 2.0f, 10}); // Posicion hardcodeada por el momento
 
   while (!WindowShouldClose()) {
     float delta = GetFrameTime();

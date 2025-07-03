@@ -12,7 +12,6 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define TARGET_FPS 60
-#define CHARACTER_DEFAULT_SPEED 1.0f
 
 // Character
 #define CHARACTER_DEFAULT_SPEED 1.0f
@@ -21,5 +20,13 @@
 #define PLAYER_SPRITE_SHEET "assets/playerSprites.png"
 #define PLAYER_SPRITE_FRAMES 3
 #define PLAYER_SPRITE_ROWS 4
+#define PLAYER_SPRITE_LEFT 2
+#define PLAYER_SPRITE_RIGHT 3
+#define PLAYER_SPRITE_UP 1
+#define PLAYER_SPRITE_DOWN 4
+
+// Car
+#define CAR_LEFT -1
+#define CAR_RIGHT 1
 
 #endif // !CONSTANTS_HEADER
