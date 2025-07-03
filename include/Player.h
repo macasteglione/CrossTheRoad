@@ -11,8 +11,6 @@
 #include "Character.h"
 #include "raylib.h"
 
-enum Direction { DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3 };
-
 struct InputState {
   bool up;
   bool down;
