@@ -1,11 +1,12 @@
+#include "../include/Constants.h"
 #include "../include/Player.h"
 #include "raylib.h"
 
 Player::Player(const Vector2 _position) : Character(_position) {
-  playerTexture = LoadTexture("assets/playerSprites.png");
+  playerTexture = LoadTexture(PLAYER_SPRITE_SHEET);
 
-  frameWidth = (float)playerTexture.width / 3;
-  frameHeight = (float)playerTexture.height / 4;
+  frameWidth = (float)playerTexture.width / PLAYER_SPRITE_FRAMES;
+  frameHeight = (float)playerTexture.height / PLAYER_SPRITE_ROWS;
 
   frameRec = {0.f, 0.f, frameWidth, frameHeight};
   isMoving = false;
@@ -15,8 +16,9 @@ Player::Player(const Vector2 _position) : Character(_position) {
 Player::~Player() { UnloadTexture(playerTexture); }
 
 void Player::Draw() const {
-  Rectangle destRec = {position.x, position.y, frameWidth * 2.f,
-                       frameHeight * 2.f};
+  float textureSize = 2.f;
+  Rectangle destRec = {position.x, position.y, frameWidth * textureSize,
+                       frameHeight * textureSize};
 
   Vector2 origin = {0.f, 0.f};
   float rotation = 0.0f;
@@ -72,7 +74,7 @@ void Player::UpdateAnimation(const InputState &input, float delta) {
 
     if (timer >= frameTime) {
       timer = 0.0f;
-      currentFrame = (currentFrame + 1) % 3;
+      currentFrame = (currentFrame + 1) % PLAYER_SPRITE_FRAMES;
     }
   } else {
     currentFrame = 0;

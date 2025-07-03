@@ -8,9 +8,17 @@
 #ifndef CONSTANTS_HEADER
 #define CONSTANTS_HEADER
 
+// Ventana del juego
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define TARGET_FPS 60
+
+// Character
 #define CHARACTER_DEFAULT_SPEED 1.0f
+
+// Player
+#define PLAYER_SPRITE_SHEET "assets/playerSprites.png"
+#define PLAYER_SPRITE_FRAMES 3
+#define PLAYER_SPRITE_ROWS 4
 
 #endif // !CONSTANTS_HEADER
