@@ -9,6 +9,9 @@
 #define PLAYER_HEADER
 
 #include "Character.h"
+#include "raylib.h"
+
+enum Direction { DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3 };
 
 struct InputState {
   bool up;
@@ -20,19 +23,17 @@ struct InputState {
 class Player final : public Character {
 private:
   InputState inputState;
+  Direction direction;
 
-  void SetControls();
+  void UpdateAnimation(const InputState &input, float delta);
+  InputState ReadInput() const;
 
 public:
   explicit Player(Vector2 _position);
-
-  ~Player() override = default;
-
+  ~Player() override;
   void Draw() const override;
-
-  void Update() override;
-
-  void ApplyInput(InputState &input);
+  void Update(float delta) override;
+  void ApplyInput(const InputState &input);
 };
 
 #endif // !PLAYER_HEADER
