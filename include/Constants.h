@@ -29,4 +29,8 @@
 #define CAR_LEFT -1
 #define CAR_RIGHT 1
 
+// Server
+#define MAX_LINE 1024
+#define SERVER_PORT 28002
+
 #endif // !CONSTANTS_HEADER
