@@ -9,16 +9,29 @@
 #define PLAYER_HEADER
 
 #include "Character.h"
+#include "raylib.h"
+
+struct InputState {
+  bool up;
+  bool down;
+  bool left;
+  bool right;
+};
 
 class Player final : public Character {
+private:
+  InputState inputState;
+  int spriteDirectionIndex;
+
+  void UpdateAnimation(const InputState &input, float delta);
+  InputState ReadInput() const;
+
 public:
   explicit Player(Vector2 _position);
-
-  ~Player() override = default;
-
+  ~Player() override;
   void Draw() const override;
-
-  void Update() override;
+  void Update(float delta) override;
+  void ApplyInput(const InputState &input);
 };
 
 #endif // !PLAYER_HEADER

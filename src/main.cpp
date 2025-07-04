@@ -1,16 +1,29 @@
+#include "Car.h"
+#include "Constants.h"
+#include "Player.h"
 #include <cstdlib>
 #include <raylib.h>
-#include "../include/Constants.h"
 
 int main(void) {
-  InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "CrossTheRoad!");
+  InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Cross The Road");
   SetTargetFPS(TARGET_FPS);
 
+  Player *player =
+      new Player(Vector2{SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f});
+  Car *car = new Car(
+      Vector2{SCREEN_WIDTH / 2.0f, 10}); // Posicion hardcodeada por el momento
+
   while (!WindowShouldClose()) {
+    float delta = GetFrameTime();
+
     BeginDrawing();
     {
       ClearBackground(BLACK);
-      DrawText("Hola Mundo!", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
+      player->Update(delta);
+      player->Draw();
+
+      car->Update(delta);
+      car->Draw();
     }
     EndDrawing();
   }
