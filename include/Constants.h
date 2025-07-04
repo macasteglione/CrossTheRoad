@@ -28,6 +28,11 @@
 // Car
 #define CAR_LEFT -1
 #define CAR_RIGHT 1
+#define CAR_SPRITE_SHEET "assets/jeep_1/Ride.png"
+#define CAR_SPRITE_ROWS 2
+#define CAR_SPRITE_FRAMES 8
+#define CAR_SPRITE_LEFT 0
+#define CAR_SPRITE_RIGHT 1
 
 // Server
 #define MAX_LINE 1024

@@ -1,18 +1,18 @@
-#include "Constants.h"
 #include "Player.h"
+#include "Constants.h"
 
 Player::Player(const Vector2 _position) : Character(_position) {
-  playerTexture = LoadTexture(PLAYER_SPRITE_SHEET);
+  characterTexture = LoadTexture(PLAYER_SPRITE_SHEET);
 
-  frameWidth = (float)playerTexture.width / PLAYER_SPRITE_FRAMES;
-  frameHeight = (float)playerTexture.height / PLAYER_SPRITE_ROWS;
+  frameWidth = (float)characterTexture.width / PLAYER_SPRITE_FRAMES;
+  frameHeight = (float)characterTexture.height / PLAYER_SPRITE_ROWS;
 
   frameRec = {0.f, 0.f, frameWidth, frameHeight};
   isMoving = false;
   spriteDirectionIndex = PLAYER_SPRITE_DOWN;
 }
 
-Player::~Player() { UnloadTexture(playerTexture); }
+Player::~Player() { UnloadTexture(characterTexture); }
 
 void Player::Draw() const {
   float textureSize = 2.f;
@@ -22,7 +22,7 @@ void Player::Draw() const {
   Vector2 origin = {0.f, 0.f};
   float rotation = 0.0f;
 
-  DrawTexturePro(playerTexture, frameRec, destRec, origin, rotation, WHITE);
+  DrawTexturePro(characterTexture, frameRec, destRec, origin, rotation, WHITE);
 }
 
 void Player::Update(float delta) {
