@@ -14,6 +14,9 @@
 class Car : public Character {
 private:
   int carDirection;
+  int spriteDirectionIndex;
+
+  void UpdateAnimation(float delta);
 
 public:
   explicit Car(Vector2 _position);
