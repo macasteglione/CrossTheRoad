@@ -1,5 +1,5 @@
-#include "../include/Car.h"
-#include "../include/Constants.h"
+#include "Car.h"
+#include "Constants.h"
 
 Car::Car(const Vector2 _position) : Character(_position) {
   // playerTexture = LoadTexture(CAR_SPRITE_SHEET);

@@ -1,5 +1,5 @@
-#include "../include/Constants.h"
-#include "../include/Player.h"
+#include "Constants.h"
+#include "Player.h"
 
 Player::Player(const Vector2 _position) : Character(_position) {
   playerTexture = LoadTexture(PLAYER_SPRITE_SHEET);

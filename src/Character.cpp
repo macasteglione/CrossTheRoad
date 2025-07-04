@@ -1,4 +1,4 @@
-#include "../include/Character.h"
+#include "Character.h"
 #include "Constants.h"
 
 Character::Character(const Vector2 _position) : position(_position) {
