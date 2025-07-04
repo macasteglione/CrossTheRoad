@@ -13,7 +13,7 @@
 class Character {
 protected:
   Vector2 position;
-  Texture2D playerTexture;
+  Texture2D characterTexture;
   Rectangle frameRec;
   float movementSpeed;
   float frameTime, timer;
